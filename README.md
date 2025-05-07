@@ -15,11 +15,11 @@ interaction: for each layer we can write an accurate analytical form that can de
 
 The first step directly concerns the physics of the problem: the analytical model suggests that the in-plane electronic density of a graphene layer is given by 
 
-![Graphene density equation](immages_md/in_plane_density.png)
+![In plane density equation](immages_md/in_plane_density.png)
 
 while the full three-dimensional electronic density is modeled as
 
-![Graphene density equation](immages_md/3d_density.png)
+![Tridimensional density equation](immages_md/3d_density.png)
 
 The first notebook, `npg_stm_images.ipynb`, is used to simulate STM-like images for a tuple of randomly generated twist angles, which depend on the number of layer: one acquired in Constant Current Mode (CCM-direct lattice), its corresponding image in reciprocal space (CCM-reciprocal), and one acquired in Constant Height Mode (CHM-direct).
 
