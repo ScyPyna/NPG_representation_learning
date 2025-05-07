@@ -13,17 +13,9 @@ interaction: for each layer we can write an accurate analytical form that can de
 
 ## Step 1: Physical Model and Image Simulation
 
-The first step directly concerns the physics of the problem: the analytical model suggests that the in-plane electronic density of a graphene layer is given by
+The first step directly concerns the physics of the problem: the analytical model suggests that the in-plane electronic density of a graphene layer is given by (while the full three-dimensional electronic density is modeled as)
 
-\[
-\phi_{\parallel}(x,y) = 1 - \dfrac{1}{3} \cos\left[\dfrac{2\pi}{a} \left(x + \dfrac{y}{\sqrt{3}}\right)\right] - \dfrac{1}{3} \cos\left[\dfrac{2\pi}{a} \left(x - \dfrac{y}{\sqrt{3}}\right)\right] - \dfrac{1}{3} \cos\left(\dfrac{4\pi y}{\sqrt{3} a}\right)
-\]
-
-while the full three-dimensional electronic density is modeled as
-
-\[
-n(x,y,z) = \dfrac{n_0}{m} \sum_{i=1}^{m} \phi_{\parallel}(x_i , y_i) \, e^{- \dfrac{|z - z_i|}{\lambda}}
-\]
+![Graphene density equation](images_md/density.png)
 
 The first notebook, `npg_stm_images.ipynb`, is used to simulate STM-like images for a tuple of randomly generated twist angles, which depend on the number of layer: one acquired in Constant Current Mode (CCM-direct lattice), its corresponding image in reciprocal space (CCM-reciprocal), and one acquired in Constant Height Mode (CHM-direct).
 
