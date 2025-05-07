@@ -11,12 +11,30 @@ interaction: for each layer we can write an accurate analytical form that can de
 
 ## Getting Started
 
-### First step: dataset building 
+## Step 1: Physical Model and Image Simulation
 
-The first thing to do is to build a dataset that physically represents the problem: The goal is to recognize how much two or more layers of a graphene-derived material are twisted relative to each other, as it is known that there are certain 'magic' angles at which particular properties are exhibited. The first step is to produce as many STM image simulations as possible and collect them in a dataset that links them to the twist angles for each layer
-* Python, jupyter notebook (ipynb)
+The first step directly concerns the physics of the problem: the analytical model suggests that the in-plane electronic density of a graphene layer is given by
 
-### Second step: Convolutional autoencoder
+\[
+\phi_{\parallel}(x,y) = 1 - \dfrac{1}{3} \cos\left[\dfrac{2\pi}{a} \left(x + \dfrac{y}{\sqrt{3}}\right)\right] - \dfrac{1}{3} \cos\left[\dfrac{2\pi}{a} \left(x - \dfrac{y}{\sqrt{3}}\right)\right] - \dfrac{1}{3} \cos\left(\dfrac{4\pi y}{\sqrt{3} a}\right)
+\]
+
+while the full three-dimensional electronic density is modeled as
+
+\[
+n(x,y,z) = \dfrac{n_0}{m} \sum_{i=1}^{m} \phi_{\parallel}(x_i , y_i) \, e^{- \dfrac{|z - z_i|}{\lambda}}
+\]
+
+The first notebook, `npg_stm_images.ipynb`, is used to simulate STM-like images for a tuple of randomly generated twist angles, which depend on the number of layer: one acquired in Constant Current Mode (CCM-direct lattice), its corresponding image in reciprocal space (CCM-reciprocal), and one acquired in Constant Height Mode (CHM-direct).
+
+## Step 2: Dataset Generation
+
+Now that we have all the functions needed to generate a set of images for a single tuple of angles, we need to create a sufficient number of such tuples to build a dataset suitable for training a neural network. 
+
+The `generate_dataset.py` script is designed to be adaptive, with all key variables defined via argument parsing to accommodate different generation environments. In my case, I had access to a CPU-based SLURM cluster, which allowed me to parallelize the generation process according to the number of jobs I could submit.
+
+In parallel with the image generation, a metadata file is created to associate each image set with its corresponding angle tuple and identifier. Everything is then packaged into a single `.HDF5` file.
+### Second step: CNN classifier
 
 * How/where to download your program
 * Any modifications needed to be made to files/folders
